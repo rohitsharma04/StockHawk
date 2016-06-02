@@ -1,0 +1,62 @@
+<!--
+  ~ Copyright 2016 Rohit Sharma (skyrohithigh)
+  ~
+  ~ Licensed under the Apache License, Version 2.0 (the "License");
+  ~ you may not use this file except in compliance with the License.
+  ~ You may obtain a copy of the License at
+  ~
+  ~     http://www.apache.org/licenses/LICENSE-2.0
+  ~
+  ~ Unless required by applicable law or agreed to in writing, software
+  ~ distributed under the License is distributed on an "AS IS" BASIS,
+  ~ WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+  ~ See the License for the specific language governing permissions and
+  ~ limitations under the License.
+  -->
+
+
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:layout_margin="@dimen/widget_margin">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="#abDEDFDE"
+        android:orientation="vertical">
+        <LinearLayout
+            android:id="@+id/widget_layout_main"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="#aaDEDFDE"
+            android:orientation="horizontal"
+            android:paddingLeft="5dp"
+            android:paddingRight="5dp">
+            <ImageView
+                android:id="@+id/widget_img_launcher"
+                android:layout_width="32dp"
+                android:layout_height="32dp"
+                android:layout_gravity="center_vertical"
+                android:src="@mipmap/ic_launcher"/>
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/stock_quotes"
+                android:layout_gravity="center_vertical"
+                android:textColor="@android:color/black"
+                android:textAppearance="?android:attr/textAppearanceMedium"
+                android:textStyle="bold"
+                android:paddingStart="@dimen/widget_header_padding"
+                android:paddingLeft="@dimen/widget_header_padding"
+                android:paddingEnd="@dimen/widget_header_padding"
+                android:paddingRight="@dimen/widget_header_padding"/>
+        </LinearLayout>
+        <ListView
+            android:id="@+id/stock_list"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+        </ListView>
+    </LinearLayout>
+
+</FrameLayout>

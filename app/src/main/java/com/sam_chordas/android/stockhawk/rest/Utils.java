@@ -34,10 +34,18 @@ public class Utils {
             if (jsonObject != null && jsonObject.length() != 0) {
                 jsonObject = jsonObject.getJSONObject("query");
                 int count = Integer.parseInt(jsonObject.getString("count"));
+                Log.v(LOG_TAG,JSON);
+                Log.v(LOG_TAG,"count :"+count);
                 if (count == 1) {
                     jsonObject = jsonObject.getJSONObject("results")
                             .getJSONObject("quote");
-                    batchOperations.add(buildBatchOperation(jsonObject));
+
+                    //Invalid Stock Symbol
+                    if(jsonObject.getString("Bid") == null || jsonObject.getString("Bid").equals("null")){
+                        Log.v(LOG_TAG,"Invalid Stock Symbol : "+ jsonObject.getString("symbol"));
+                    }else {//Valid Stock Symbol
+                        batchOperations.add(buildBatchOperation(jsonObject));
+                    }
                 } else {
                     resultsArray = jsonObject.getJSONObject("results").getJSONArray("quote");
 

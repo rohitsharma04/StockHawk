@@ -19,6 +19,7 @@ import android.view.Gravity;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.LinearLayout;
 import android.widget.Toast;
 
 import com.afollestad.materialdialogs.MaterialDialog;
@@ -36,6 +37,9 @@ import com.google.android.gms.gcm.Task;
 import com.melnykov.fab.FloatingActionButton;
 import com.sam_chordas.android.stockhawk.touch_helper.SimpleItemTouchHelperCallback;
 
+/*
+ *  Updated by Rohit Sharma on 02/06/16
+ */
 public class MyStocksActivity extends AppCompatActivity implements LoaderManager.LoaderCallbacks<Cursor> {
 
     /**
@@ -52,18 +56,11 @@ public class MyStocksActivity extends AppCompatActivity implements LoaderManager
     private QuoteCursorAdapter mCursorAdapter;
     private Context mContext;
     private Cursor mCursor;
-    boolean isConnected;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         mContext = this;
-        ConnectivityManager cm =
-                (ConnectivityManager) mContext.getSystemService(Context.CONNECTIVITY_SERVICE);
-
-        NetworkInfo activeNetwork = cm.getActiveNetworkInfo();
-        isConnected = activeNetwork != null &&
-                activeNetwork.isConnectedOrConnecting();
         setContentView(R.layout.activity_my_stocks);
         // The intent service is for executing immediate pulls from the Yahoo API
         // GCMTaskService can only schedule tasks, they cannot execute immediately
@@ -71,7 +68,7 @@ public class MyStocksActivity extends AppCompatActivity implements LoaderManager
         if (savedInstanceState == null) {
             // Run the initialize task service so that some stocks appear upon an empty database
             mServiceIntent.putExtra("tag", "init");
-            if (isConnected) {
+            if (Utils.isNetworkAvailable(mContext)) {
                 startService(mServiceIntent);
             } else {
                 networkToast();
@@ -98,7 +95,7 @@ public class MyStocksActivity extends AppCompatActivity implements LoaderManager
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (isConnected) {
+                if (Utils.isNetworkAvailable(mContext)) {
                     new MaterialDialog.Builder(mContext).title(R.string.symbol_search)
                             .content(R.string.content_test)
                             .inputType(InputType.TYPE_CLASS_TEXT)
@@ -107,9 +104,13 @@ public class MyStocksActivity extends AppCompatActivity implements LoaderManager
                                 public void onInput(MaterialDialog dialog, CharSequence input) {
                                     // On FAB click, receive user input. Make sure the stock doesn't already exist
                                     // in the DB and proceed accordingly
+
+                                    //make the stock symbols capital letter
+                                    String newSymbol = input.toString().toUpperCase();
+
                                     Cursor c = getContentResolver().query(QuoteProvider.Quotes.CONTENT_URI,
                                             new String[]{QuoteColumns.SYMBOL}, QuoteColumns.SYMBOL + "= ?",
-                                            new String[]{input.toString()}, null);
+                                            new String[]{newSymbol}, null);
                                     if (c.getCount() != 0) {
                                         Toast toast =
                                                 Toast.makeText(MyStocksActivity.this, "This stock is already saved!",
@@ -120,7 +121,7 @@ public class MyStocksActivity extends AppCompatActivity implements LoaderManager
                                     } else {
                                         // Add the stock to DB
                                         mServiceIntent.putExtra("tag", "add");
-                                        mServiceIntent.putExtra("symbol", input.toString());
+                                        mServiceIntent.putExtra("symbol", newSymbol);
                                         startService(mServiceIntent);
                                     }
                                 }
@@ -138,7 +139,7 @@ public class MyStocksActivity extends AppCompatActivity implements LoaderManager
         mItemTouchHelper.attachToRecyclerView(recyclerView);
 
         mTitle = getTitle();
-        if (isConnected) {
+        if (Utils.isNetworkAvailable(mContext)) {
             long period = 3600L;
             long flex = 10L;
             String periodicTag = "periodic";
@@ -220,6 +221,8 @@ public class MyStocksActivity extends AppCompatActivity implements LoaderManager
     public void onLoadFinished(Loader<Cursor> loader, Cursor data) {
         mCursorAdapter.swapCursor(data);
         mCursor = data;
+        //Update view Status
+        updateEmptyView();
     }
 
     @Override
@@ -227,4 +230,21 @@ public class MyStocksActivity extends AppCompatActivity implements LoaderManager
         mCursorAdapter.swapCursor(null);
     }
 
+
+    public void updateEmptyView(){
+        LinearLayout noInternetView = (LinearLayout) findViewById(R.id.llNoInternetView);
+        LinearLayout noStockView = (LinearLayout) findViewById(R.id.llNoStocksView);
+        if(mCursorAdapter.getItemCount() == 0){
+            if(!Utils.isNetworkAvailable(mContext)){
+                noInternetView.setVisibility(View.VISIBLE);
+                noStockView.setVisibility(View.GONE);
+            }else{
+                noInternetView.setVisibility(View.GONE);
+                noStockView.setVisibility(View.VISIBLE);
+            }
+        }else{
+            noInternetView.setVisibility(View.GONE);
+            noStockView.setVisibility(View.GONE);
+        }
+    }
 }

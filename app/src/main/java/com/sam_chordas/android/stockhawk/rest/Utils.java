@@ -1,6 +1,9 @@
 package com.sam_chordas.android.stockhawk.rest;
 
 import android.content.ContentProviderOperation;
+import android.content.Context;
+import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
 import android.util.Log;
 
 import com.sam_chordas.android.stockhawk.data.QuoteColumns;
@@ -14,6 +17,7 @@ import org.json.JSONObject;
 
 /**
  * Created by sam_chordas on 10/8/15.
+ * Updated by Rohit Sharma on 02/06/16
  */
 public class Utils {
 
@@ -94,5 +98,13 @@ public class Utils {
             e.printStackTrace();
         }
         return builder.build();
+    }
+
+    public static boolean isNetworkAvailable(Context context){
+        ConnectivityManager connectivityManager = (ConnectivityManager)
+                context.getSystemService(Context.CONNECTIVITY_SERVICE);
+        NetworkInfo activeNetwork = connectivityManager.getActiveNetworkInfo();
+        return activeNetwork != null &&
+                activeNetwork.isConnectedOrConnecting();
     }
 }

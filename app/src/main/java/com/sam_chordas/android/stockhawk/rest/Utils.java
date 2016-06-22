@@ -9,11 +9,11 @@ import android.util.Log;
 import com.sam_chordas.android.stockhawk.data.QuoteColumns;
 import com.sam_chordas.android.stockhawk.data.QuoteProvider;
 
-import java.util.ArrayList;
-
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
+
+import java.util.ArrayList;
 
 /**
  * Created by sam_chordas on 10/8/15.
@@ -43,6 +43,8 @@ public class Utils {
                     //Invalid Stock Symbol
                     if(jsonObject.getString("Bid") == null || jsonObject.getString("Bid").equals("null")){
                         Log.v(LOG_TAG,"Invalid Stock Symbol : "+ jsonObject.getString("symbol"));
+                        return null;
+
                     }else {//Valid Stock Symbol
                         batchOperations.add(buildBatchOperation(jsonObject));
                     }

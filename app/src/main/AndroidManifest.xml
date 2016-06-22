@@ -52,11 +52,23 @@
                 android:resource="@xml/stock_quote_widget_info" />
         </receiver>
 
-        <!-- 2. The service that will send our collection data to our widget. It needs the
-        permission android.permission.BIND_REMOTEVIEWS -->
-        <service android:name=".stock_widget.StockQuoteWidgetService"
+        <!--
+        2. The service that will send our collection data to our widget. It needs the
+        permission android.permission.BIND_REMOTEVIEWS
+        -->
+        <service
+            android:name=".stock_widget.StockQuoteWidgetService"
             android:permission="android.permission.BIND_REMOTEVIEWS" />
 
+        <!-- Shows a toast whenever an invalid stock symbol is added -->
+        <receiver
+            android:name=".service.InvalidStockSymbolReceiver"
+            android:enabled="true"
+            android:exported="true">
+            <intent-filter>
+                <action android:name="com.sam_chordas.android.stockhawk.service.InvalidStockSymbolReceiver"></action>
+            </intent-filter>
+        </receiver>
     </application>
 
 </manifest>

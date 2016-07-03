@@ -20,6 +20,7 @@ import android.appwidget.AppWidgetManager;
 import android.content.Context;
 import android.content.Intent;
 import android.database.Cursor;
+import android.os.Bundle;
 import android.widget.RemoteViews;
 import android.widget.RemoteViewsService;
 
@@ -45,7 +46,12 @@ public class StockQuoteWidgetFactory implements RemoteViewsService.RemoteViewsFa
 
     @Override
     public void onCreate() {
-
+        mCursor = mContext.getContentResolver().query(QuoteProvider.Quotes.CONTENT_URI,
+                new String[]{QuoteColumns._ID, QuoteColumns.SYMBOL, QuoteColumns.BIDPRICE,
+                        QuoteColumns.PERCENT_CHANGE, QuoteColumns.CHANGE, QuoteColumns.ISUP},
+                QuoteColumns.ISCURRENT + " = ?",
+                new String[]{"1"},
+                null);
     }
 
     @Override
@@ -75,22 +81,24 @@ public class StockQuoteWidgetFactory implements RemoteViewsService.RemoteViewsFa
 
     @Override
     public RemoteViews getViewAt(int position) {
-        RemoteViews rv = new RemoteViews(mContext.getPackageName(), R.layout.widget_list_item_quote);
+        RemoteViews remoteViews = new RemoteViews(mContext.getPackageName(), R.layout.list_item_quote);
+
         if (mCursor.moveToPosition(position)) {
-            rv.setTextViewText(R.id.stock_symbol,
-                    mCursor.getString(mCursor.getColumnIndex(QuoteColumns.SYMBOL)));
-            rv.setTextViewText(R.id.bid_price,
-                    mCursor.getString(mCursor.getColumnIndex(QuoteColumns.BIDPRICE)));
-            rv.setTextViewText(R.id.change,
-                    mCursor.getString(mCursor.getColumnIndex(QuoteColumns.CHANGE)));
+            String symbol = mCursor.getString(1);
+            remoteViews.setTextViewText(R.id.stock_symbol, symbol);
+            remoteViews.setTextViewText(R.id.bid_price, mCursor.getString(2));
+            remoteViews.setTextViewText(R.id.change, mCursor.getString(3));
 
             if (mCursor.getInt(mCursor.getColumnIndex("is_up")) == 1) {
-                rv.setTextColor(R.id.change,mContext.getResources().getColor(R.color.widget_stock_up));
+                remoteViews.setInt(R.id.change, "setBackgroundResource",
+                        R.drawable.percent_change_pill_green);
             } else {
-                rv.setTextColor(R.id.change,mContext.getResources().getColor(R.color.widget_stock_down));
+                remoteViews.setInt(R.id.change, "setBackgroundResource",
+                        R.drawable.percent_change_pill_red);
             }
         }
-        return rv;
+
+        return remoteViews;
     }
 
     @Override

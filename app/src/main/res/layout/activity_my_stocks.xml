@@ -61,6 +61,5 @@
       android:src="@drawable/ic_add_white_24dp"
       android:clickable="true"
       app:fabSize="normal"
-      app:layout_behavior="com.sam_chordas.android.stockhawk.ui.ScrollAwareFABBehavior"
       />
 </android.support.design.widget.CoordinatorLayout>

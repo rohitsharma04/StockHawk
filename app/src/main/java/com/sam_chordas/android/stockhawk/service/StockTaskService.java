@@ -78,7 +78,7 @@ public class StockTaskService extends GcmTaskService {
                 // Init task. Populates DB with quotes for the symbols seen below
                 try {
                     urlStringBuilder.append(
-                            URLEncoder.encode("\"YHOO\",\"AAPL\",\"GOOG\",\"MSFT\")", "UTF-8"));
+                            URLEncoder.encode("\"YHOO\",\"TSLA\",\"GOOG\",\"MSFT\")", "UTF-8"));
                 } catch (UnsupportedEncodingException e) {
                     e.printStackTrace();
                 }

@@ -25,15 +25,6 @@ import java.util.ArrayList;
  * Created by rohit on 7/8/16.
  */
 public class StockMeta implements Parcelable {
-    /*
-     "Company-Name": "Tesla Motors, Inc.",
-    "Exchange-Name": "NMS",
-    "unit": "DAY",
-    "timestamp": "",
-    "first-trade": "20100629",
-    "last-trade": "20160707",
-    "currency": "USD",
-    "previous_close_price": 254.96 */
     public String companyName;
     public String exchangeName;
     public String firstTrade;

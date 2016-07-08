@@ -131,7 +131,7 @@ public class MyStocksActivity extends AppCompatActivity implements LoaderManager
 //                                                        Toast.LENGTH_LONG);
 //                                        toast.setGravity(Gravity.CENTER, Gravity.CENTER, 0);
 //                                        toast.show();
-                                            Snackbar.make(coordinatorLayout, "This stock is already saved!", Snackbar.LENGTH_SHORT).show();
+                                            Snackbar.make(coordinatorLayout, getString(R.string.stock_already_saved), Snackbar.LENGTH_SHORT).show();
                                             return;
                                         } else {
                                             // Add the stock to DB

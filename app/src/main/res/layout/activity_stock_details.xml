@@ -15,8 +15,8 @@
   ~ limitations under the License.
   -->
 <android.support.design.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="fill_parent"
-    android:layout_height="fill_parent"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto">
     <LinearLayout
         xmlns:android="http://schemas.android.com/apk/res/android"
@@ -69,37 +69,44 @@
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="Stock Symbol"
+                            android:text="@string/stock_symbol"
+                            android:contentDescription="@string/stock_symbol"
                             android:textAppearance="?android:textAppearanceSmall"/>
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="Stock Name"
+                            android:text="@string/stock_name"
+                            android:contentDescription="@string/stock_name"
                             android:textAppearance="?android:textAppearanceSmall"/>
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="Exchange Name"
+                            android:text="@string/stock_name"
+                            android:contentDescription="@string/exchange_name"
                             android:textAppearance="?android:textAppearanceSmall"/>
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="First Trade"
+                            android:text="@string/first_trade"
+                            android:contentDescription="@string/first_trade"
                             android:textAppearance="?android:textAppearanceSmall"/>
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="Last Trade"
+                            android:text="@string/last_trade"
+                            android:contentDescription="@string/last_trade"
                             android:textAppearance="?android:textAppearanceSmall"/>
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="Currency"
+                            android:text="@string/currency"
+                            android:contentDescription="@string/currency"
                             android:textAppearance="?android:textAppearanceSmall"/>
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="Bid Price"
+                            android:text="@string/bid_price"
+                            android:contentDescription="@string/bid_price"
                             android:textAppearance="?android:textAppearanceSmall"/>
                     </LinearLayout>
                     <LinearLayout
@@ -111,43 +118,36 @@
                             android:id="@+id/tvStockSymbol"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="YHOO"
                             android:textAppearance="?android:textAppearanceSmall"/>
                         <TextView
                             android:id="@+id/tvStockName"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:text="Yahoo Trade"
                             android:textAppearance="?android:textAppearanceSmall"/>
                         <TextView
                             android:id="@+id/tvExchangeName"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="US Exchange"
                             android:textAppearance="?android:textAppearanceSmall"/>
                         <TextView
                             android:id="@+id/tvfirstTrade"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="02/11/2004"
                             android:textAppearance="?android:textAppearanceSmall"/>
                         <TextView
                             android:id="@+id/tvlastTrade"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="06/07/2016"
                             android:textAppearance="?android:textAppearanceSmall"/>
                         <TextView
                             android:id="@+id/tvCurrency"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="USD"
                             android:textAppearance="?android:textAppearanceSmall"/>
                         <TextView
                             android:id="@+id/tvBidPrice"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="232.4"
                             android:textAppearance="?android:textAppearanceSmall"/>
                     </LinearLayout>
                 </LinearLayout>

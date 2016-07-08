@@ -157,7 +157,6 @@ public class StockDetails extends AppCompatActivity implements HistoricData.Hist
         lineData.setDrawValues(false);
         dataSet.setDrawCircles(false);
 
-//        lineChart.setBackgroundColor(Color.WHITE);
         lineChart.setDescription("Last 12 months stock comparision");
         lineChart.setData(lineData);
         lineChart.animateX(3000);

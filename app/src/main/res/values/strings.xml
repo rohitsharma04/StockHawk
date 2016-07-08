@@ -15,4 +15,16 @@
     <string name="appwidget_text">EXAMPLE</string>
     <string name="add_widget">Add widget</string>
     <string name="stock_quotes">Stock Quotes</string>
+    <string name="graph_content_description">Graph showing prices of the stock over time!</string>
+
+    <string name="no_data_show" translatable="true">Can\'t show you data over time!</string>
+    <string name="retry" translatable="true">RETRY</string>
+    <string name="empty_view_text" translatable="true">Stocks Data not available!</string>
+    <string name="data_error_json" translatable="true">Looks like it\'s our fault!</string>
+    <string name="data_no_internet" translatable="true">Internet Connection is required!</string>
+    <string name="data_error_parse" translatable="true">Unprecedented errors have happened!</string>
+    <string name="data_unknown_error" translatable="true">Can\'t identify the problem here!</string>
+    <string name="data_server_down" translatable="true">The Yahoo! Server is not responding properly!</string>
+    <string name="data_no_error" translatable="true">No errors!</string>
+
 </resources>

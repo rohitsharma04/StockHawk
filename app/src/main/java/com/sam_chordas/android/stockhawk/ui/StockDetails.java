@@ -134,12 +134,20 @@ public class StockDetails extends AppCompatActivity implements HistoricData.Hist
         left.setEnabled(true);
         left.setLabelCount(5, true);
 
+        xAxis.setTextColor(Color.WHITE);
+        left.setTextColor(Color.WHITE);
+
         lineChart.getAxisRight().setEnabled(false);
 
         lineChart.getLegend().setTextSize(12f);
 
         LineDataSet dataSet = new LineDataSet(entries, symbol);
         LineData lineData = new LineData(xvalues, dataSet);
+
+        dataSet.setColor(Color.WHITE);
+        dataSet.setValueTextColor(Color.WHITE);
+        lineData.setValueTextColor(Color.WHITE);
+        lineChart.setDescriptionColor(Color.WHITE);
 
         lineData.setDrawValues(false);
         dataSet.setDrawCircles(false);

@@ -35,6 +35,7 @@ import com.github.mikephil.charting.data.Entry;
 import com.github.mikephil.charting.data.LineData;
 import com.github.mikephil.charting.data.LineDataSet;
 import com.sam_chordas.android.stockhawk.R;
+import com.sam_chordas.android.stockhawk.data.QuoteColumns;
 import com.sam_chordas.android.stockhawk.rest.Utils;
 import com.sam_chordas.android.stockhawk.service.stockhistory.HistoricData;
 import com.sam_chordas.android.stockhawk.service.stockhistory.StockMeta;
@@ -52,9 +53,11 @@ public class StockDetails extends AppCompatActivity implements HistoricData.Hist
     LineChart lineChart;
     LinearLayout linearLayout;
 
-    TextView stockName,stockSymbol,firstTrade,lastTrade,currency,closePrice,exchangeName;
+    TextView stockName,stockSymbol,firstTrade,lastTrade,currency, tvBidPrice,exchangeName;
 
-    String symbol = "";
+    String symbol;
+    String bidPrice;
+
     ActionBar actionBar;
 
 
@@ -75,13 +78,16 @@ public class StockDetails extends AppCompatActivity implements HistoricData.Hist
         firstTrade = (TextView) findViewById(R.id.tvfirstTrade);
         lastTrade = (TextView) findViewById(R.id.tvlastTrade);
         currency = (TextView) findViewById(R.id.tvCurrency);
-//        closePrice = (TextView) findViewById(R.id.tvClosePrice);
+        tvBidPrice = (TextView) findViewById(R.id.tvBidPrice);
         exchangeName = (TextView) findViewById(R.id.tvExchangeName);
 
-        symbol = getIntent().getStringExtra("symbol_name");
+        //Getting Values from intents
+        symbol = getIntent().getStringExtra(QuoteColumns.SYMBOL);
+        bidPrice = getIntent().getStringExtra(QuoteColumns.BIDPRICE);
 
+        //Setting values to the text
         stockSymbol.setText(symbol);
-
+        tvBidPrice.setText(bidPrice);
 
         actionBar = getSupportActionBar();
         if (actionBar != null) {
@@ -110,7 +116,6 @@ public class StockDetails extends AppCompatActivity implements HistoricData.Hist
         firstTrade.setText(Utils.convertDate(stockMeta.firstTrade));
         lastTrade.setText(Utils.convertDate(stockMeta.lastTrade));
         currency.setText(stockMeta.currency);
-//        closePrice.setText(""+stockMeta.previousClosePrice);
         exchangeName.setText(stockMeta.exchangeName);
 
         ArrayList<Entry> entries = new ArrayList<>();

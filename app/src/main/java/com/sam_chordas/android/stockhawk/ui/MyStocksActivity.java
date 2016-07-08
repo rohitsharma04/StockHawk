@@ -94,7 +94,8 @@ public class MyStocksActivity extends AppCompatActivity implements LoaderManager
                     public void onItemClick(View v, int position) {
                         if (mCursor.moveToPosition(position)) {
                             Intent intent = new Intent(mContext, StockDetails.class);
-                            intent.putExtra("symbol_name", mCursor.getString(mCursor.getColumnIndex(QuoteColumns.SYMBOL)));
+                            intent.putExtra(QuoteColumns.SYMBOL, mCursor.getString(mCursor.getColumnIndex(QuoteColumns.SYMBOL)));
+                            intent.putExtra(QuoteColumns.BIDPRICE, mCursor.getString(mCursor.getColumnIndex(QuoteColumns.BIDPRICE)));
                             startActivity(intent);
                         }
                     }

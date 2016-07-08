@@ -35,4 +35,7 @@
     <string name="currency">Currency</string>
     <string name="bid_price">Bid Price</string>
 
+    <string name="loading_stock_data">Loading Stock Data...</string>
+    <string name="symbol_details" translatable="false" formatted="true">%s Details</string>
+    <string name="last_12month_comparision">Last 12 months stock comparision</string>
 </resources>

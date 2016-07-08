@@ -110,6 +110,7 @@ public class Utils {
         return builder.build();
     }
 
+    //Checks if network is available or not
     public static boolean isNetworkAvailable(Context context){
         ConnectivityManager connectivityManager = (ConnectivityManager)
                 context.getSystemService(Context.CONNECTIVITY_SERVICE);
@@ -118,6 +119,7 @@ public class Utils {
                 activeNetwork.isConnectedOrConnecting();
     }
 
+    //Converts Date
     public static String convertDate(String inputDate){
         StringBuilder outputFormattedDate = new StringBuilder();
         outputFormattedDate.append(inputDate.substring(6))

@@ -43,10 +43,10 @@ import java.util.ArrayList;
 public class HistoricData {
     private final static String TAG = HistoricData.class.getSimpleName();
     public final static String HISTORICAL_DATA_STATUS = "historical_data_status";
-    HistoricalDataCallback historicalDataCallback;
-    ArrayList<StockSymbol> stockSymbols;
-    StockMeta stockMeta;
-    Context context;
+    public HistoricalDataCallback historicalDataCallback;
+    public ArrayList<StockSymbol> stockSymbols;
+    public StockMeta stockMeta;
+    public Context context;
 
     final String BASE_URL = "http://chartapi.finance.yahoo.com/instrument/1.0/";
     final String END_URL = "/chartdata;type=quote;range=1y/json";
@@ -78,14 +78,14 @@ public class HistoricData {
     public static final int STATUS_ERROR_UNKNOWN = 5;
 
     public HistoricData(Context context, HistoricalDataCallback historicalDataCallback) {
-        Log.v(TAG,"HistoricData");
+//        Log.v(TAG,"HistoricData");
         this.context = context;
         this.historicalDataCallback = historicalDataCallback;
         this.stockSymbols = new ArrayList<>();
     }
 
     public void setHistoricalDataStatus(@HistoricalDataStatuses int status) {
-        Log.v(TAG,"setHistoricDataStatus");
+//        Log.v(TAG,"setHistoricDataStatus");
         SharedPreferences sp = PreferenceManager.getDefaultSharedPreferences(context);
         SharedPreferences.Editor editor = sp.edit();
         editor.putInt(HISTORICAL_DATA_STATUS, status);
@@ -93,7 +93,7 @@ public class HistoricData {
     }
 
     private String fetchData(String url) throws IOException{
-        Log.v(TAG,"fetchData");
+//        Log.v(TAG,"fetchData");
         OkHttpClient client = new OkHttpClient();
         Request request = new Request.Builder()
                 .url(url)
@@ -106,7 +106,7 @@ public class HistoricData {
 
 
     public void getHistoricData(String symbol){
-        Log.v(TAG,"getHistoricData");
+//        Log.v(TAG,"getHistoricData");
         final String url = BASE_URL + symbol + END_URL;
 
         new AsyncTask<Void,Void, Void>(){

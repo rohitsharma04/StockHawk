@@ -66,11 +66,11 @@ public class StockDetails extends AppCompatActivity implements HistoricData.Hist
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_stock_details);
 
-        Log.v(TAG,"onCreate");
+//        Log.v(TAG,"onCreate");
 
         //Binding views
         lineChart = (LineChart) findViewById(R.id.lineChart);
-        lineChart.setNoDataText("Loading Stock Data...");
+        lineChart.setNoDataText(getString(R.string.loading_stock_data));
         linearLayout = (LinearLayout) findViewById(R.id.ll_stock_details);
 
         stockName = (TextView) findViewById(R.id.tvStockName);
@@ -94,11 +94,11 @@ public class StockDetails extends AppCompatActivity implements HistoricData.Hist
             actionBar.setDisplayHomeAsUpEnabled(true);
             actionBar.setDisplayShowHomeEnabled(true);
         }
+        actionBar.setTitle(String.format(getString(R.string.symbol_details),symbol));
 
-        actionBar.setTitle(symbol+" Details");
+        historicData = new HistoricData(this, this);
 
         if(Utils.isNetworkAvailable(this)) {
-            historicData = new HistoricData(this, this);
             historicData.getHistoricData(symbol);
         }else{
             historicData.setHistoricalDataStatus(HistoricData.STATUS_ERROR_NO_NETWORK);
@@ -109,7 +109,7 @@ public class StockDetails extends AppCompatActivity implements HistoricData.Hist
 
     @Override
     public void onSuccess(StockMeta stockMeta) {
-        Log.v(TAG,"onSuccess");
+//        Log.v(TAG,"onSuccess");
         this.stockSymbols = stockMeta.stockSymbols;
 
         stockName.setText(stockMeta.companyName);
@@ -157,14 +157,14 @@ public class StockDetails extends AppCompatActivity implements HistoricData.Hist
         lineData.setDrawValues(false);
         dataSet.setDrawCircles(false);
 
-        lineChart.setDescription("Last 12 months stock comparision");
+        lineChart.setDescription(getString(R.string.last_12month_comparision));
         lineChart.setData(lineData);
         lineChart.animateX(3000);
     }
 
     @Override
     public void onFailure() {
-        Log.v(TAG,"onFailure");
+//        Log.v(TAG,"onFailure");
         String errorMessage = "";
 
         @HistoricData.HistoricalDataStatuses
